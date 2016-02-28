@@ -21,6 +21,7 @@ Vagrant.configure(2) do |config|
     c.vm.provider "virtualbox" do |vb|
       vb.name = "hadoop-master"
     end
+    c.vm.provision "shell", inline: "cat /home/vagrant/.ssh/id_rsa.pub > /vagrant/cache/master_public_key"
   end
 
   config.vm.define "slave" do |c|
@@ -29,5 +30,6 @@ Vagrant.configure(2) do |config|
     c.vm.provider "virtualbox" do |vb|
       vb.name = "hadoop-slave"
     end
+    c.vm.provision "shell", inline: "cat /vagrant/cache/master_public_key >> /home/vagrant/.ssh/authorized_keys"
   end
 end
