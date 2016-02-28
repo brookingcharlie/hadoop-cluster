@@ -38,6 +38,8 @@ if [[ ! -e '/opt/hadoop-2.7.2' ]]; then
   sudo -u vagrant cp '/vagrant/files/hdfs-site.xml' '/opt/hadoop/etc/hadoop/hdfs-site.xml'
   sudo -u vagrant cp '/vagrant/files/mapred-site.xml' '/opt/hadoop/etc/hadoop/mapred-site.xml'
   sudo -u vagrant cp '/vagrant/files/yarn-site.xml' '/opt/hadoop/etc/hadoop/yarn-site.xml'
+  sudo -u vagrant cp '/vagrant/files/masters' '/opt/hadoop/etc/hadoop/masters'
+  sudo -u vagrant cp '/vagrant/files/slaves' '/opt/hadoop/etc/hadoop/slaves'
 fi
 
 sudo -u vagrant cp '/vagrant/files/run-example.sh' '/home/vagrant/run-example.sh'

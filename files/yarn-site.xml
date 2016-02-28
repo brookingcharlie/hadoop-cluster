@@ -4,4 +4,8 @@
     <name>yarn.nodemanager.aux-services</name>
     <value>mapreduce_shuffle</value>
   </property>
+  <property>
+    <name>yarn.resourcemanager.hostname</name>
+    <value>192.168.50.4</value>
+  </property>
 </configuration>
