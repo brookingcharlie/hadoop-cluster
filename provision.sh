@@ -1,8 +1,8 @@
 #!/bin/bash
 
 sed -i "s,http://archive.ubuntu.com/,http://au.archive.ubuntu.com/,g" /etc/apt/sources.list
-apt-get update
-apt-get dist-upgrade -y
+#apt-get update
+#apt-get dist-upgrade -y
 
 apt-get install -y virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
 
