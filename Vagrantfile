@@ -24,12 +24,14 @@ Vagrant.configure(2) do |config|
     c.vm.provision "shell", inline: "cat /home/vagrant/.ssh/id_rsa.pub > /vagrant/cache/master_public_key"
   end
 
-  config.vm.define "slave" do |c|
-    c.vm.hostname = "hadoop-slave"
-    c.vm.network "private_network", ip: "192.168.50.5"
-    c.vm.provider "virtualbox" do |vb|
-      vb.name = "hadoop-slave"
+  (1..2).each do |i|
+    config.vm.define "slave-#{i}" do |c|
+      c.vm.hostname = "hadoop-slave-#{i}"
+      c.vm.network "private_network", ip: "192.168.50.#{4 + i}"
+      c.vm.provider "virtualbox" do |vb|
+        vb.name = "hadoop-slave-#{i}"
+      end
+      c.vm.provision "shell", inline: "cat /vagrant/cache/master_public_key >> /home/vagrant/.ssh/authorized_keys"
     end
-    c.vm.provision "shell", inline: "cat /vagrant/cache/master_public_key >> /home/vagrant/.ssh/authorized_keys"
   end
 end

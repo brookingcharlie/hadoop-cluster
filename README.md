@@ -3,8 +3,8 @@
 Automated scripts to provision a multi-node Hadoop cluster based on instructions at
 https://hadoop.apache.org/docs/r2.7.2/hadoop-project-dist/hadoop-common/ClusterSetup.html.
 
-Uses Vagrant with a simple Bash provisioner script to create two Ubuntu VMs
-(master and slave) with the following installed:
+Uses Vagrant with a simple Bash provisioner script to create Ubuntu VMs
+(one master and two slaves) with the following installed:
 
 * Ubuntu 15.10
 * Apache Hadoop 2.7.2 (binary)
