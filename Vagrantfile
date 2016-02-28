@@ -16,6 +16,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", path: "provision.sh"
 
   config.vm.define "master" do |c|
+    c.vm.hostname = "hadoop-master"
     c.vm.network "private_network", ip: "192.168.50.4"
     c.vm.provider "virtualbox" do |vb|
       vb.name = "hadoop-master"
@@ -23,6 +24,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "slave" do |c|
+    c.vm.hostname = "hadoop-slave"
     c.vm.network "private_network", ip: "192.168.50.5"
     c.vm.provider "virtualbox" do |vb|
       vb.name = "hadoop-slave"
