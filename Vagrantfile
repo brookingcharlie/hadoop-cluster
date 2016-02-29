@@ -1,6 +1,10 @@
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/wily64"
 
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--groups", "/hadoop-cluster"]
+  end
+
   # vagrant-cachier speeds up provisioning by caching downloaded Linux packages.
   # To install, run `vagrant plugin install vagrant-cachier`.
   # See http://fgrehm.viewdocs.io/vagrant-cachier/.
