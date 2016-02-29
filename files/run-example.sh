@@ -1,8 +1,13 @@
 #!/bin/bash
 
-# Clean up any previous run
-rm -rf /tmp/hadoop-${USER}
+# Stop and clean up any previous run
+/opt/hadoop/sbin/stop-yarn.sh
+/opt/hadoop/sbin/stop-dfs.sh
 rm -rf output
+rm -rf /tmp/hadoop-${USER}
+while read slave; do
+  ssh $slave -- "rm -rf /tmp/hadoop-${USER}"
+done < /opt/hadoop/etc/hadoop/slaves
 
 # Format the filesystem
 hdfs namenode -format
