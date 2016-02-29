@@ -16,12 +16,12 @@ hdfs namenode -format
 /opt/hadoop/sbin/start-dfs.sh
 echo "You can now browse the web interface for the NameNode at http://192.168.50.4:50070/"
 
-# Make the HDFS directories required to execute MapReduce jobs
-hdfs dfs -mkdir -p "/user/${USER}"
-
 # Start ResourceManager daemon and NodeManager daemon
 /opt/hadoop/sbin/start-yarn.sh
 echo "You can now browse the web interface for the ResourceManager at http://192.168.50.4:8088/"
+
+# Make the HDFS directories required to execute MapReduce jobs
+hdfs dfs -mkdir -p "/user/${USER}"
 
 # Copy input files into the distributed filesystem. We just use Hadoop's config
 # as ordinary text files here - they aren't actually configuring anything.
