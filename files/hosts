@@ -1,0 +1,9 @@
+# We remove Ubuntu's default entry, "127.0.1.1 $(hostname)" to avoid a Connection
+# Refused Exception. From the Hadoop Wiki: "Check that there isn't an entry for
+# your hostname mapped to 127.0.0.1 or 127.0.1.1 in /etc/hosts (Ubuntu is notorious
+# for this)" [https://wiki.apache.org/hadoop/ConnectionRefused].
+
+127.0.0.1 localhost
+192.168.50.4 hadoop-master
+192.168.50.5 hadoop-slave-1
+192.168.50.6 hadoop-slave-2
