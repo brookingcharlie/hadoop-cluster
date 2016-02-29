@@ -19,6 +19,9 @@ sudo -u vagrant chmod 0600 /home/vagrant/.ssh/authorized_keys
 sudo -u vagrant cp /vagrant/files/ssh_config /home/vagrant/.ssh/config
 sudo -u vagrant chmod 0600 /home/vagrant/.ssh/config
 
+# Configure /etc/hosts to allow hostnames to be resovled by HDFS and YARN.
+cp '/vagrant/files/hosts' '/etc/hosts'
+
 # Create a cache folder under /vagrant, which mounts the host filesystem.
 # This means we won't have to re-download large binaries (e.g. Hadoop 2.7 is 202 MB)
 # when running vagrant up after a vagrant destroy. Note that we rely on the 'continue'
@@ -42,6 +45,3 @@ sudo -u vagrant cp '/vagrant/files/masters' '/opt/hadoop/etc/hadoop/masters'
 sudo -u vagrant cp '/vagrant/files/slaves' '/opt/hadoop/etc/hadoop/slaves'
 
 sudo -u vagrant cp '/vagrant/files/run-example.sh' '/home/vagrant/run-example.sh'
-
-# Configure /etc/hosts to allow hostnames to be resovled by HDFS and YARN.
-cp '/vagrant/files/hosts' '/etc/hosts'
