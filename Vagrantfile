@@ -1,11 +1,6 @@
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/wily64"
 
-  config.vm.provider "virtualbox" do |vb|
-    vb.cpus = 2
-    vb.memory = "2048"
-  end
-
   # vagrant-cachier speeds up provisioning by caching downloaded Linux packages.
   # To install, run `vagrant plugin install vagrant-cachier`.
   # See http://fgrehm.viewdocs.io/vagrant-cachier/.
@@ -20,6 +15,8 @@ Vagrant.configure(2) do |config|
     c.vm.network "private_network", ip: "192.168.50.4"
     c.vm.provider "virtualbox" do |vb|
       vb.name = "hadoop-master"
+      vb.cpus = 2
+      vb.memory = "2048"
     end
     c.vm.provision "shell", inline: "cat /home/vagrant/.ssh/id_rsa.pub > /vagrant/cache/master_public_key"
   end
@@ -30,6 +27,8 @@ Vagrant.configure(2) do |config|
       c.vm.network "private_network", ip: "192.168.50.#{4 + i}"
       c.vm.provider "virtualbox" do |vb|
         vb.name = "hadoop-slave-#{i}"
+        vb.cpus = 2
+        vb.memory = "4096"
       end
       c.vm.provision "shell", inline: "cat /vagrant/cache/master_public_key >> /home/vagrant/.ssh/authorized_keys"
     end
