@@ -5,13 +5,6 @@ Vagrant.configure(2) do |config|
     vb.customize ["modifyvm", :id, "--groups", "/hadoop-cluster"]
   end
 
-  # vagrant-cachier speeds up provisioning by caching downloaded Linux packages.
-  # To install, run `vagrant plugin install vagrant-cachier`.
-  # See http://fgrehm.viewdocs.io/vagrant-cachier/.
-  if Vagrant.has_plugin?("vagrant-cachier")
-    config.cache.scope = :box
-  end
-
   config.vm.provision "shell", path: "provision.sh"
 
   config.vm.define "master" do |c|
@@ -43,5 +36,12 @@ Vagrant.configure(2) do |config|
         cat /vagrant/tmp/master_public_key >> /home/vagrant/.ssh/authorized_keys
       """
     end
+  end
+
+  # vagrant-cachier speeds up provisioning by caching downloaded Linux packages.
+  # To install, run `vagrant plugin install vagrant-cachier`.
+  # See http://fgrehm.viewdocs.io/vagrant-cachier/.
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
   end
 end
