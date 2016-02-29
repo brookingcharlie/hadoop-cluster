@@ -22,7 +22,11 @@ Vagrant.configure(2) do |config|
       vb.cpus = 2
       vb.memory = "2048"
     end
-    c.vm.provision "shell", inline: "cat /home/vagrant/.ssh/id_rsa.pub > /vagrant/cache/master_public_key"
+    # Save master node's public key
+    c.vm.provision "shell", inline: """
+      mkdir -p /vagrant/tmp
+      cat /home/vagrant/.ssh/id_rsa.pub > /vagrant/tmp/master_public_key
+    """
   end
 
   (1..2).each do |i|
@@ -34,7 +38,10 @@ Vagrant.configure(2) do |config|
         vb.cpus = 2
         vb.memory = "4096"
       end
-      c.vm.provision "shell", inline: "cat /vagrant/cache/master_public_key >> /home/vagrant/.ssh/authorized_keys"
+      # Authorise passphraseless SSH from master to slaves
+      c.vm.provision "shell", inline: """
+        cat /vagrant/tmp/master_public_key >> /home/vagrant/.ssh/authorized_keys
+      """
     end
   end
 end
