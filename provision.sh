@@ -43,11 +43,14 @@ sudo -u vagrant cp '/vagrant/files/slaves' '/opt/hadoop/etc/hadoop/slaves'
 
 sudo -u vagrant cp '/vagrant/files/run-example.sh' '/home/vagrant/run-example.sh'
 
-# Configure /etc/hosts to allow hostnames to be resovled. If we don't do this,
-# both HDFS (on reverse lookup) and YARN (on normal lookup) will fail.
+# Configure /etc/hosts to allow hostnames to be resovled by HDFS and YARN.
+#
+# We remove Ubuntu's default entry, "127.0.1.1 $(hostname)" to avoid a Connection
+# Refused Exception. From the Hadoop Wiki: "Check that there isn't an entry for
+# your hostname mapped to 127.0.0.1 or 127.0.1.1 in /etc/hosts (Ubuntu is notorious
+# for this)" [https://wiki.apache.org/hadoop/ConnectionRefused].
 cat > /etc/hosts << EOF
 127.0.0.1 localhost
-127.0.1.1 $(hostname)
 192.168.50.4 hadoop-master
 192.168.50.5 hadoop-slave-1
 192.168.50.6 hadoop-slave-2
